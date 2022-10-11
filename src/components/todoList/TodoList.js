@@ -1,21 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { addTodo, deleteTodo, markAsCompleted } from './todoSlice'
+import { initializeConnect } from 'react-redux/es/components/connect';
+import TodoItem from '../TodoItem/TodoItem'
+
+// import { deleteTodo, markAsCompleted } from './todoSlice'
 
 function TodoList(props) {
-  const todos = useSelector(state => state.todos.todos)
+  const todos = useSelector(state => state.todos)
   const dispatch = useDispatch()
 
   return (
     <div>
       {todos.map((todo) => (
-        <>
-          <p>{todo.todo}</p>
-          <button onClick={dispatch(deleteTodo(todo))}>Delete Todo</button>
-          <button onClick={dispatch(markAsCompleted(todo))}>Mark As Completed</button>
-        </>
+        < TodoItem title={todo.title} id={todo.id} completed={todo.completed} key={todo.id} />
       ))}
     </div>
   );
 }
 
 export default TodoList;
+
